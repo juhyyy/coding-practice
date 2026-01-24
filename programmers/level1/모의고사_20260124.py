@@ -1,3 +1,4 @@
+# https://school.programmers.co.kr/learn/courses/30/lessons/42840
 def solution(answers):
     
     #패턴 찾아주기 
