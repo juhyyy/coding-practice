@@ -6,13 +6,14 @@ def solution(answers):
     p3 = [3, 3, 1, 1, 2, 2, 4, 4, 5, 5]
     patterns = [p1, p2, p3]
 
-    # 각 닝겐 점수
+    # 각 점수
     scores = [0, 0, 0]
     
     ######################
     from itertools import cycle
 
     #zip 같은 인덱스 끼리 리스트로 묶어주는 함수 
+    # cycle 
     scores = [
         sum(a == p for a, p in zip(answers, cycle(p1))),
         sum(a == p for a, p in zip(answers, cycle(p2))),
@@ -28,4 +29,6 @@ def solution(answers):
 #                 scores[idx] += 1
 
 #     max_score = max(scores)
+    # enumerate    👉 리스트(같은 반복 가능한 것)를 돌리면서 인덱스와 값을 튜플 형태로 주는 함수 
 #     return [i + 1 for i, s in enumerate(scores) if s == max_score]
+     # +1 을 왜 함? 인덱스는 0부터 시작하니까. 몇번째인지 답하려면 +1 을 해야함.
