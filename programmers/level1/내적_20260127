@@ -1,0 +1,5 @@
+def solution(a, b):
+    dot =sum((A*B) for A,B in zip(a,b))
+    
+    
+    return dot
