@@ -1,0 +1,4 @@
+def solution(absolutes, signs):
+    
+    answer =sum(-a if not s else a for a, s in zip(absolutes, signs))
+    return answer
