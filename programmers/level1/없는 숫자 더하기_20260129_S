@@ -1,0 +1,7 @@
+def solution(numbers):
+    non = []
+    for i in range(0,10):
+        if not i in numbers:
+            non.append(i)
+    answer = sum(non)
+    return answer 
