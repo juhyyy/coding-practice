@@ -1,0 +1,7 @@
+from collections import Counter
+def solution(participant, completion):
+    incompletion = Counter(participant) - Counter(completion)
+    
+    return next(iter(incompletion))
+ #   return list(incompletion.keys())[0]
+    #iter() = “하나씩 꺼낼 준비”
