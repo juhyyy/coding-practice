@@ -1,0 +1,39 @@
+def solution(arr):
+
+    # for i in range(0,len(arr)-1): 
+    #     if arr[i] == arr[i+1]:
+    #         arr.pop(i+1)
+# => 문제: 인덱스가 줄어들음
+    
+    # i = 0
+    # while arr[i] == arr[i+1]:
+    #     arr.pop(i+1)
+    #     i += 1
+# => 문제: 연속 3번 같은 수 나오면 스킵됨
+
+    # i = 0
+    # while arr[i] == arr[i+1]:
+    #     arr.pop(i+1)
+# => 문제: i 가 안늘어남
+
+    i=0
+    while i <len(arr)-1:
+        if arr[i] == arr[i+1]:
+            arr.pop(i+1)
+        else:
+            i += 1
+#문제: 정확성  테스트 통과  but 시간 효율성 out
+
+
+       # (가장 흔한 정답) 새 리스트로 만들기: O(n)
+        out = []
+        for x in arr:
+            if not out or out[-1] != x: 
+# 👉 “아직 아무것도 안 넣었거나, 방금 넣은 값이 지금 값이랑 다르면”
+                out.append(x)
+        arr = out
+
+#한줄
+out = [arr[0]] + [arr[i] for i in range(1, len(arr)) if arr[i] != arr[i-1]]
+
+    return arr
