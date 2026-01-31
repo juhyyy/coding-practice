@@ -1,0 +1,5 @@
+SELECT NAME,	DATETIME
+FROM ANIMAL_INS
+ORDER BY ANIMAL_ID DESC;
+
+#뭘 기준으로 하는 지 문제 제대로 읽기
