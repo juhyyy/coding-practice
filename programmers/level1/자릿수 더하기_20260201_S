@@ -1,0 +1,30 @@
+# 첫 오답 
+# def solution(n):
+#     answer = []
+#     while n / 10 >= 1 :
+#         answer.append(n//10) 
+#         n /= 10
+
+#     # return sum(answer)
+#     return answer
+
+def solution(n):
+    answer=list(str(n))
+    
+    a =[]
+    for x in answer:
+        a.append(int(x))
+    return sum(a)
+
+# 리스트 컴프리헨션으로 바꾸는법
+def solution(n):
+    return sum(int(x) for x in str(n))
+
+# 10을 나누어서 푸는 법
+
+def solution(n):
+    total = 0
+    while n > 0:
+        total += n % 10
+        n //= 10
+    return total
