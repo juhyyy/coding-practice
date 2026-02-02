@@ -1,0 +1,43 @@
+def solution(s):
+    s = list(s.lower())
+    
+    jaden = []
+
+    for x in range(0,len(s)):
+        if x == 0:
+            if type(s[0]) == str:  ## 사실 필요없는 부분 -> 3은 upper 해도 3임.
+                b =s[0].upper()
+                jaden.append(b)
+            
+        else:
+            if s[x-1] == " ":
+                a= s[x].upper()
+                jaden.append(a) # + 문자열은 immutable
+            else: 
+                jaden.append(s[x])
+                
+                _____________________
+## 클린코드
+
+def solution(s):
+    s = s.lower()
+    out = []
+
+    for i, ch in enumerate(s):
+        if i == 0 or s[i - 1] == " ":
+            out.append(ch.upper())
+        else:
+            out.append(ch)
+
+    return "".join(out)
+
+
+#한줄 버전
+
+def solution(s):
+    return ' '.join(word.capitalize() for word in s.lower().split(' '))
+
+    
+
+        
+    return ''.join(jaden) # list -> str
