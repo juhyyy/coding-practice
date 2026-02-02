@@ -1,0 +1,9 @@
+def solution(n):
+    answer = []
+    while n > 0: # n//10>0 이 아닌 이유: 1의 자리 수까지
+        answer.append(n%10)
+        n //= 10 
+    return sum(answer)
+
+def solution(n):
+    return sum(map(int,str(n)))
