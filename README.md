@@ -8,8 +8,16 @@
 - `programmers/sql/` - SQL 문제
 
 ## 📊 Progress
-- Level 1: 23개
-- SQL: 1개
+2월 진행
+Lv.2: 1개  🎉
+Lv.1: 41개
+SQL: 12개
+깃헙: 11일 연속
+
+2월 목표:
+
+Lv.2: 20-30개 
+하루 1개씩!
 
 ## 🎯 Goal
 - 2026년 3월까지 Level 2 완성
