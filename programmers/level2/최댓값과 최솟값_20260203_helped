@@ -1,0 +1,34 @@
+def solution(s):
+    ss=s.split(" ")
+    # ss=map(int,ss)  
+#   3.  ss가 리스트가 된 게 아니라,
+# “map 객체(= iterator)”를 가리키게 된 것
+
+    ss=list(map(int,ss) ) 
+    aa = []     
+    aa.append(min(ss)) #min(ss)가 iterator를 끝까지 소비한다 -> 1. max() arg is an empty sequence
+    
+    # 2. map() 결과는 한 번만 쓰는 용도
+#여러 번 써야 하면 → list로 고정시켜야 함
+    aa.append(max(ss))
+    aa = list(map(str,aa))
+    return " ".join(aa)
+
+
+📝 이 문제에서 배운 점 (메모)
+
+split() 👉 공백 여러 개도 안전 ( split(" ") ❌ )
+min / max 👉 타입 기준 비교 (str vs int 완전 다름)
+map() 👉 원본 안 바꿈, iterator 반환
+iterator 👉 한 번 쓰면 끝 (min 쓰면 max 못 씀)
+
+
+###클린코드
+
+def solution(s):
+    nums = list(map(int, s.split()))
+    return f"{min(nums)} {max(nums)}"
+
+여러 번 쓰려면 👉 list(map(...)) 로 고정
+join() 👉 str만 가능 (int 들어가면 에러)
+계산은 int, 출력 직전만 str
