@@ -1,0 +1,17 @@
+def solution(s):
+    s = list(s.lower())
+    answer = []
+    
+    for x in s:
+        if answer == [] or answer[-1]== ' ':
+            x = x.upper()
+            answer.append(x)
+        else:
+            answer.append(x)
+            
+    
+    return ''.join(answer)
+
+
+
+#레벨1의 같은 숫자는 싫어 풀고 푸니까 풀림.
