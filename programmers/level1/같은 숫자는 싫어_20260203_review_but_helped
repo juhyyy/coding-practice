@@ -1,0 +1,19 @@
+def solution(arr):
+    #새로 쌓는 연습
+    result = []
+    # for x in arr: 
+    #     if x==0:# 0은 if 로 예외 처리 해줘야하는 게 맞겠지? 인덱스로 가지 않고 값 자체로 가면 그런 고민 안해도 됨. 왜? 
+    #         arr[x] = arr[x]
+    #     elif x>=1 and arr[x] == arr[x-1]:
+    #         arr.pop(x-1)
+    
+    
+    
+    #--------
+    # if result가 비어있거나, 마지막 값과 x가 다르면:
+    #     넣는다
+    for x in arr:
+        if result == [] or result[-1] !=x:
+            result.append(x)
+
+    return result
