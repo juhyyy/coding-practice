@@ -1,0 +1,10 @@
+def solution(s): #str
+    ss = list(map(int,list(s.split())))
+
+    answer = []
+    answer.append(min(ss)) #int
+    answer.append(max(ss))
+    
+    
+    
+    return ' '.join(map(str,answer)) #join 안에는 str
