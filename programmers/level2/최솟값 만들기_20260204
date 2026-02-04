@@ -1,0 +1,10 @@
+# list.sort()는 정렬된 리스트를 “반환하지 않는다” → None을 반환한다
+# A 자체를 정렬함 (원본 변경)
+
+def solution(A,B): #자연수 배열
+
+    # # 닷프로덕트의 최소값
+    A.sort()
+    B.sort(reverse=True)
+
+    return sum(a*b for a,b in zip(A,B))
