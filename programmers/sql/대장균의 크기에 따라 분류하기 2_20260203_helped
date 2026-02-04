@@ -15,3 +15,9 @@ FROM (
     FROM ECOLI_DATA
 ) t
 ORDER BY ID ASC;
+
+SELECT
+    ID,
+    CASE bucket ...
+FROM (서브쿼리) t 👉 여기서의 FROM은 서브쿼리 결과(t)를 대상으로 SELECT, 
+ORDER BY ID ASC
