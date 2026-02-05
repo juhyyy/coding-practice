@@ -1,0 +1,34 @@
+# https://school.programmers.co.kr/learn/courses/30/lessons/12909
+ # def solution(s):
+#     answer = 0
+    
+#     for x in s:
+#         if x == '(' :
+#             answer +=1
+#         else:
+#             answer -=1
+
+def solution(s):
+    count = 0
+    
+    for x in s:
+        if x == '(':
+            count += 1
+        else:
+            count -= 1
+        
+        if count < 0:  # )( 케이스 -> 음수로 표현되는 순간 즉시 탈락시킴!
+            return False   # Boolean
+    
+    return count == 0      # Boolean
+
+
+######
+배운 거 
+✅ 삼항연산자 문법
+A if condition else B
+삼항연산자는 else가 필수
+
+return print()는 거의 항상 실수
+print()의 반환값은 None
+즉, 이건 “출력하고 None을 return”하는 코드임
