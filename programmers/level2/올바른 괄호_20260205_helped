@@ -32,3 +32,21 @@ A if condition else B
 return print()는 거의 항상 실수
 print()의 반환값은 None
 즉, 이건 “출력하고 None을 return”하는 코드임
+
+
+
+##############정석코드 
+
+def solution(s):
+    stack = []
+
+    for x in s:
+        if x == '(':
+            stack.append(x)   # push
+        else:  # ')'
+            if not stack:     # pop 할 게 없음 → )가 먼저 나옴
+                return False
+            stack.pop()       # pop
+
+    return len(stack) == 0    # 남은 '(' 있으면 False
+
