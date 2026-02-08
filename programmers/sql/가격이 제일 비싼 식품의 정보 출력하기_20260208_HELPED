@@ -4,6 +4,17 @@ SELECT PRODUCT_ID, PRODUCT_NAME	, PRODUCT_CD, CATEGORY,	MAX(PRICE) AS PRICE
 FROM FOOD_PRODUCT
 GROUP BY PRODUCT_ID, PRODUCT_NAME	, PRODUCT_CD, CATEGORY;
 
+원인
+PRODUCT_ID는 유니크한 값(PK)
+하나의 PRODUCT_ID = 하나의 행
+따라서 각 그룹에는 PRICE가 1개뿐
+👉 한 개짜리 값에서 MAX()를 구하면 원래 값 그대로 나옴
+
+핵심 정리
+MAX()는 여러 행 중에서 비교할 때만 의미 있음
+GROUP BY에 PK를 포함하면 집계 함수는 효과 없음
+
+
 ### 정답 코드 WITH 서브 쿼리 
 SELECT PRODUCT_ID, PRODUCT_NAME, PRODUCT_CD, CATEGORY, PRICE
 FROM FOOD_PRODUCT
