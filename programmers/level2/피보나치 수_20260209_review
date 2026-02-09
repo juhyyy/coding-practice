@@ -1,0 +1,18 @@
+def solution(n):
+    MOD = 1234567
+    #MOD = modulo(모듈로, 나머지 연산 )의 줄임말
+    a,b  = 0,1
+    for _ in range(2,n+1):
+        a,b = b, (a+b)%MOD
+    return b
+
+
+# 안보고 직후 review
+def solution(n):
+    mod = 1234567
+    a,b = 0,1
+    for _ in range(2,n+1):
+        a,b = b,(a+b)%mod
+    return b
+
+#완벽히는 아니지만 느끼면서 외움
