@@ -1,0 +1,20 @@
+-- 코드를 작성해주세요
+SELECT ID, 
+CASE BUCKET 
+WHEN 1 THEN 'CRITICAL'
+WHEN 2 THEN  'HIGH'
+WHEN 3 THEN 'MEDIUM'
+ELSE  'LOW' 
+
+END AS COLONY_NAME
+
+FROM ( SELECT ID, NTILE(4) OVER (ORDER BY SIZE_OF_COLONY DESC) 
+AS BUCKET FROM ECOLI_DATA) T
+ORDER BY ID ASC;
+
+
+- 케이스랑 WHEN 헷갈렸음
+- FROM 안에서 서브쿼리 하는 모양 까먹음
+- NTILE 뒤에 OVER 랑 ORDER BY 까먹음
+- T 로 왜 붙여주지?
+👉 서브쿼리는 반드시 이름(별칭, alias)을 가져야 함, 문법 규칙 선택사항 ❌ 필수 ⭕
