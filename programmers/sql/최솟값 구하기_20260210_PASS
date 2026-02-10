@@ -1,0 +1,12 @@
+SUM, MAX, MIN
+최솟값 구하기
+https://school.programmers.co.kr/learn/courses/30/lessons/59038
+
+
+가격이 제일 비싼 식품의 정보 출력하기 문제 복습하고 푸니까 풀림.
+
+
+-- 코드를 입력하세요
+SELECT DATETIME AS 시간
+FROM ANIMAL_INS
+WHERE DATETIME =  (SELECT MIN(DATETIME) FROM ANIMAL_INS);
