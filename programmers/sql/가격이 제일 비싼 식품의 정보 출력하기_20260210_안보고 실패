@@ -1,0 +1,11 @@
+SUM, MAX, MIN
+https://school.programmers.co.kr/learn/courses/30/lessons/131115
+
+-- 코드를 입력하세요
+SELECT PRODUCT_ID,	PRODUCT_NAME,	PRODUCT_CD,	CATEGORY, PRICE
+FROM FOOD_PRODUCT 
+# WHERE (MAX(PRICE) AS PRICE);
+# WHERE PRICE = MAX(PRICE);
+WHERE PRICE = (SELECT MAX(PRICE) FROM FOOD_PRODUCT );
+
+- 서브 쿼리는 셀렉트 부터 
