@@ -1,0 +1,23 @@
+
+#앤써의 위치 ###########
+def solution(s):
+#answer = [] 여기가 아니라 아래. 여기라면,  answer = 1회차 결과 + 2회차 결과 + 3회차 결과 + ...
+
+    zero = 0
+    num = 0
+    while s != '1':
+        answer = [] #answer는 매 회차마다 초기화. 왜?
+            # answer의 역할: 이번 회차에서 0을 제거하고 남은 문자들
+            #answer = 이번 회차의 결과
+        
+        for _ in s:
+
+            if _ != '0': 
+                answer.append(_)
+            else :
+                zero +=1
+        d = len(answer)
+        #d를 이진수로 나타내는 법
+        s = str(bin(d)[2:])
+        num +=1
+    return [num,zero] 
