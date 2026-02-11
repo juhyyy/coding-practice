@@ -1,0 +1,37 @@
+-- 코드를 입력하세요
+SELECT COUNT(NAME) AS count
+FROM ANIMAL_INS
+
+count
+99
+
+=> NULL 제외하고 세는 건 맞는데 중복 제거는 아님.
+
+SELECT COUNT(DISTINCT NAME) AS count
+FROM ANIMAL_INS
+WHERE NAME IS NOT NULL;
+
+중복 제거 = DISTINCT
+
+그럼 NULL 포함하려면?
+
+여기서 포인트 🔥
+COUNT()는 NULL을 절대 세지 않음.
+
+NULL도 하나의 값처럼 세고 싶으면
+NULL을 다른 값으로 바꿔줘야 해.
+
+방법 👇
+SELECT COUNT(DISTINCT IFNULL(NAME, 'NO_NAME'))
+FROM ANIMAL_INS;
+
+
+또는
+
+SELECT COUNT(DISTINCT COALESCE(NAME, 'NO_NAME'))
+FROM ANIMAL_INS;
+
+
+👉 NULL을 'NO_NAME'이라는 값으로 바꿔서
+👉 DISTINCT 적용
+👉 그걸 COUNT
