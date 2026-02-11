@@ -1,0 +1,97 @@
+투포인터 greedy
+1. 정렬
+2. 앞/뒤 비교
+3. 무거운 사람은 항상 태움
+
+https://school.programmers.co.kr/learn/courses/30/lessons/42885
+
+핵심 아이디어:
+
+가장 무거운 사람은 무조건 보트 하나를 차지한다
+그 사람을 가장 가벼운 사람이랑 같이 태울 수 있으면 같이 태우고,
+안 되면 무거운 사람은 혼자 탄다
+이걸 반복하면 보트 최소가 됨
+
+## 첫번째 오답
+
+def solution(people, limit):
+    answer = 0
+    people = sorted(people)
+    while people != []:
+        if people !=[] and max(people) + min(people) <= limit:
+            answer += 1
+            people.pop(0)
+            people.pop(-1)
+
+        elif people !=[] and max(people) + min(people) >= limit:
+            people.pop(-1)
+            answer += 1
+        else :
+            break
+    return answer
+----
+IndexError: pop from empty list
+테스트 결과 (~˘▾˘)~
+2개 중 1개 성공
+
++ max() / min()을 매번 쓰는 건 시간 초과 확정급
++ 처음에 sort 안해줬었음
+sorted, sort() 구분하
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+##두번째 답 , 결과: 효율성 테스트에서 하나 실패
+def solution(people, limit):
+    answer = 0
+    people = sorted(people)
+
+    while people:
+#하나 남았을 때 예외처리해
+        if len(people) == 1:
+            answer += 1
+            break
+
+        if people[0] + people[-1] <= limit:
+            people.pop(0)
+            people.pop(-1)
+            answer += 1
+        else:
+            people.pop(-1)
+            answer += 1
+
+    return answer
+
+
+=> people.pop(0)은 리스트 맨 앞을 빼면서 뒤 원소를 전부 한 칸씩 당김 → O(n)
+이걸 최대 5만 번 가까이 하면 O(n²) 급
+
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+지피티 답
+
+def solution(people, limit):
+    people.sort()
+    i = 0                      # 가장 가벼운 사람의 인덱스
+    j = len(people) - 1        # 가장 무거운 사람의 인덱스 
+    boats = 0
+
+    while i <= j:
+        if people[i] + people[j] <= limit:
+            i += 1             # 가벼운 사람 같이 탐
+        j -= 1                 # 무거운 사람은 항상 탐
+        boats += 1
+
+    return boats
+1.
+가벼운 사람 = 맨 앞
+무거운 사람 = 맨 뒤
+
+👉 둘이 합쳐본다.
+
+가능하면 → 둘 다 태움
+안 되면 → 무거운 사람만 태움
+
+2. 리스트를 pop으로 줄이는 게 아니라,
+아직 안 탄 사람의 범위만 인덱스를 통해 줄이는 거야.
+
+pop = 리스트 실제로 줄임 ❌
+인덱스 이동 = “이 사람은 처리 끝” 표시만 함 ✅
