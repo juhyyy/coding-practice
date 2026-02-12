@@ -1,0 +1,44 @@
+🔹 핵심 개념
+1️⃣ 최대공약수 (GCD)
+
+👉 유클리드 호제법 사용
+
+gcd(a, b)
+= gcd(b, a % b)
+
+
+b가 0이 될 때의 a가 최대공약수.
+
+2️⃣ 최소공배수 (LCM)
+lcm = (a * b) // gcd
+
+
+이 공식은 그냥 암기해도 됨.
+원리는:
+
+a × b = gcd × lcm
+
+✅ 정답 코드 (가장 깔끔한 버전)
+def solution(n, m):
+    # 최대공약수 구하기 (유클리드 호제법)
+    a, b = n, m
+    while b != 0:
+        a, b = b, a % b
+    gcd = a
+    
+    # 최소공배수
+    lcm = (n * m) // gcd
+    
+    return [gcd, lcm]
+
+🧠 더 쉬운 버전 (파이썬 내장함수 사용)
+import math
+
+def solution(n, m):
+    gcd = math.gcd(n, m)
+    lcm = (n * m) // gcd
+    return [gcd, lcm]
+
+
+코테에서는 직접 구현하는 게 좋지만,
+실무에선 math.gcd() 써도 전혀 문제 없음.
