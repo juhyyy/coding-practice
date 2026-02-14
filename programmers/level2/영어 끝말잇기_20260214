@@ -1,0 +1,15 @@
+def solution(n, words):
+    seen = set()
+
+    for i, w in enumerate(words):
+        # 중복 단어
+        if w in seen:
+            return [(i % n) + 1, (i // n) + 1]
+
+        # 끝말잇기 규칙 위반 (첫 단어 제외)
+        if i > 0 and words[i - 1][-1] != w[0]: #“이전 단어의 끝 글자”가 다음 단어의 첫글자가 아닐 때
+            return [(i % n) + 1, (i // n) + 1]
+
+        seen.add(w)
+
+    return [0, 0]
