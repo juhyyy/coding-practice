@@ -1,0 +1,43 @@
+누적(폴드)로 LCM을 합성하는 문제
+
+
+# 첫 시도 - 실패 
+from math import gcd
+def solution(arr): 
+    #x,y = 0,1 #동적 프로그래밍??
+    a = []
+    for i in range(0,len(arr)-1):
+        a.append(gcd(arr[i],arr[i+1]))
+    print(a)
+    a=min(a)
+    b=1
+    for _ in arr:
+        b *= _
+    
+    return b / a
+
+# n개면 lcm(lcm(lcm(a1,a2),a3), ... , an) 처럼 앞에서부터 계속 합쳐가면 됨 -> def 정의해서 lcm 으로?
+
+# 2트 -> 성공 
+from math import gcd
+def solution(arr):
+    def lcm(a,b):
+        return (a*b) // gcd(a,b)
+        
+    l = arr[0]
+    for i in range(0,len(arr)-1):
+        if i == 0:
+            l = lcm(l, arr[i+1])
+        else:
+            l = lcm(l, arr[i+1])
+    
+    
+    
+    return l
+
+
+++ 방법 2️⃣ reduce 사용 (조금 더 파이썬스러움)
+from functools import reduce
+
+reduce(lcm, arr)
+
