@@ -1,0 +1,51 @@
+DFS = + 또는 - 두 갈래로 계속 뻗는 자동 분기기
+
+STEP 1 — 틀
+def solution(numbers, target):
+    count = 0
+    
+    def dfs(index, total):
+        pass
+    
+    dfs(0, 0)
+    return count
+
+STEP 2 — 종료 조건만 추가
+def solution(numbers, target):
+    answer = 0
+    
+    def dfs (index, total):
+        pass
+    
+    dfs(0,0)
+    
+    if index == len(numbers):
+        if total == target:
+            answer += 1
+    return answer
+
+
+STEP 3 — 분기 2개 추가
+def solution(numbers, target):
+    answer = 0
+    
+    def dfs(index, total):
+        nonlocal answer
+        
+        # 1️⃣ 종료조건
+        if index == len(numbers):
+            if total == target:
+                answer += 1
+            return
+        
+        # 2️⃣ + 선택
+        dfs(index + 1, total + numbers[index])
+        
+        # 3️⃣ - 선택
+        dfs(index + 1, total - numbers[index])
+    
+    # 시작
+    dfs(0, 0)
+    
+    return answer
+
