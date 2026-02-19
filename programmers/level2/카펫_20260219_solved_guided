@@ -1,0 +1,63 @@
+가능한 모든 가로×세로 조합을 다 확인해 보는 방식 = 완전 탐색
+(규모가 작아서 시간 복잡도 문제 없이 충분히 돌릴 수 있는 수준)
+
+###### 포인트
+1️⃣ total = brown + yellow
+2️⃣ for width in ... (전체 후보 탐색)
+3️⃣ if total % width == 0 (직사각형 가능?)
+4️⃣ if (width - 2) * (height - 2) == yellow (노랑 조건 확인)
+
+
+#######  흐름도
+[시작]
+   ↓
+전체 타일 수 = brown + yellow
+   ↓
+width를 1부터 total까지 하나씩 시도
+   ↓
+total % width == 0 인가?
+   ↓ (아니오) ────────────────┐
+다음 width로 이동              │
+                               │
+(예)                            │
+   ↓                            │
+height = total // width         │
+   ↓                            │
+(width-2) * (height-2) == yellow ?
+   ↓
+(아니오) → 다음 width로 이동 ───┘
+   ↓
+(예)
+   ↓
+조건 만족! (정답 후보)
+   ↓
+[종료]
+
+
+#####코드 
+
+def solution(brown, yellow):
+    total = brown + yellow # 전체 칸 수 
+    
+    for width in range (1, total +1): # brown 의 width 경우의 수 다 구해보기
+        if total % width     == 0:
+            height = total / width 
+                # 조건 체크
+            if (width -2 )*(height -2) == yellow and height > 2 and width > 2 and height<=width:
+                 return [width, height]
+
+
+##의사코드
+# 전체 타일 수
+total = brown + yellow
+
+# 1. 가능한 가로 후보를 하나씩 확인
+for width in range(1, total + 1):  # 1부터 전체 타일까지
+    if total % width == 0:         # 세로가 정수가 되도록
+        height = total // width
+
+        # 2. 조건 체크: 노랑 타일이 가운데에 맞는지?
+        if (width - 2) * (height - 2) == yellow:
+            # 조건 맞으면 후보 발견!
+            print("가능한 조합:", width, height)
+            # break 해도 되고, 여러 후보 다 확인해도 됨
