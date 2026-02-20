@@ -1,0 +1,27 @@
+# 포인트
+- total = brown + yellow -> 총 너비값을 알기 위해서 
+- 가로 세로 정확히 변수 구분하기 (순서)
+- 너비의 range는 최소 3부터 시작하고 루트 씌운 값까지만 해도 됨 (효율성)
+for width in range(3, int(total ** 0.5) + 1)
+- 경우의 수 다 구하고 조건 체크해서 필터링하기
+
+## 복습 1트
+def solution(brown, yellow):
+    total = brown + yellow
+    for width in range(3, int(total ** 0.5) + 1):
+        if total %width == 0:
+            height = total // width
+            #조건 체크 
+            if (width-2)*(height-2) == yellow and width>= height:
+                return [width, height]
+###### 마지막 줄에서 순서 때문에 틀렸다 함. 왜??
+작은 수부터 도니까 [o,x] 에서 o 이 더 크게 출력되려면 순서 바꿔주는 것에 유의해야함
+
+def solution(brown, yellow):
+    total = brown + yellow
+    for width in range(3, int(total ** 0.5) + 1):
+        if total %width == 0:
+            height = total // width
+            #조건 체크 
+            if (width-2)*(height-2) == yellow and width>= height:
+                return [ height,width]
