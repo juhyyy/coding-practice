@@ -1,0 +1,23 @@
+https://school.programmers.co.kr/learn/courses/30/lessons/12980
+
+## 문제 이해 ## 
+점프 = 비용 1
+순간이동 = 비용 0
+목표 = N 도달
+구하는 것 = 최소 점프 횟수
+--
+
+N이 홀수일 때마다 점프 1번
+
+## 
+def solution(n):
+    answer = 0
+    
+    while n > 0:
+        if n % 2 == 1:   # 홀수면
+            answer += 1
+            n -= 1
+        else:            # 짝수면
+            n //= 2
+            
+    return answer
