@@ -1,0 +1,8 @@
+https://school.programmers.co.kr/learn/courses/30/lessons/273710
+IS NULL / IS NOT NULL 띄어쓰기
+
+-- 코드를 작성해주세요
+SELECT I.ITEM_ID,	I.ITEM_NAME
+FROM ITEM_INFO AS I JOIN ITEM_TREE AS T ON I.ITEM_ID = T.ITEM_ID
+WHERE T.PARENT_ITEM_ID IS NULL ########띄어쓰기!!!!!!!!!!!
+ORDER BY I.ITEM_ID ASC;
