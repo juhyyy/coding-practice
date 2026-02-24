@@ -15,7 +15,7 @@ for i in range(n):
         BFS(i)
         network_count += 1
 
-###### 정답 코드
+###### 정답 코드 (BFS)
 
 
 from collections import deque
@@ -137,3 +137,29 @@ while queue:
         if computers[cur][j] == 1 and not visited[j]:
             visited[j] = True
             queue.append(j)
+
+
+
+#########
+###### 정답 코드 (DFS)
+def solution(n, computers):
+    visited = [False] * n  # 방문 여부 저장
+    count = 0  # 네트워크 개수
+    
+    # DFS 함수 정의
+    def dfs(i):
+        visited[i] = True  # 현재 컴퓨터 방문 처리
+        
+        # i번 컴퓨터와 연결된 모든 컴퓨터 확인
+        for j in range(n):
+            # 연결되어 있고 아직 방문하지 않았다면
+            if computers[i][j] == 1 and not visited[j]:
+                dfs(j)  # 그 컴퓨터로 깊게 들어감 (재귀 호출)
+    
+    # 모든 컴퓨터를 하나씩 확인
+    for i in range(n):
+        if not visited[i]:  # 아직 방문하지 않은 컴퓨터면
+            dfs(i)          # 그 컴퓨터 기준으로 DFS 시작
+            count += 1      # 네트워크 하나 완료
+    
+    return count
