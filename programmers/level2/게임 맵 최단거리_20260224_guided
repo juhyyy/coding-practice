@@ -1,0 +1,50 @@
+게임 맵 최단거리 https://school.programmers.co.kr/learn/courses/30/lessons/1844
+bfs
+
+큐 사용
+(x, y, 거리) 저장
+방문 처리
+도착하면 거리 반환
+
+🎮문제 이해 
+
+2차원 배열이 주어짐
+1 = 갈 수 있는 길
+0 = 벽
+(0,0)에서 시작
+(n-1, m-1)까지 가야 함
+상하좌우 이동만 가능
+최단 거리 구하기
+못 가면 -1
+
+from collections import deque
+def solution(maps):
+    n = len(maps)
+    m = len(maps[0])
+    
+    dx = [1,-1,0,0]
+    dy = [0,0,1,-1]
+    
+    queue = deque()
+    queue.append((0,0,1))
+    maps[0][0] = 0 # 방문처리 
+    
+    while queue:
+        x,y,dist = queue.popleft()
+        
+        if x == n-1 and y==m-1:
+            return dist
+        
+        for i in range(4):
+            nx = x + dx[i]
+            ny = y + dy[i]
+            #한 칸 움직여본 좌표 계산
+            if 0 <= nx < n and 0<= ny <m and maps[nx][ny]==1:
+                maps[nx][ny]=0
+                queue.append((nx,ny,dist+1))
+        
+        
+    return -1
+        
+        
+            
