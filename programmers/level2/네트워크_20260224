@@ -1,0 +1,139 @@
+https://school.programmers.co.kr/learn/courses/30/lessons/43162
+연결된 컴퓨터 묶음이 몇 개인가?
+
+문제 구조
+- n개의 컴퓨터
+- computers라는 2차원 배열
+- computers[i][j] == 1이면 연결됨
+- 네트워크(덩어리) 개수 구하기
+덩어리 하나 시작할 때마다 +1
+다 더하는 게 아니라 “시작 횟수”를 센다
+
+####### 의사코드
+for i in range(n):
+    if 아직 방문 안 했으면:
+        BFS(i)
+        network_count += 1
+
+###### 정답 코드
+
+
+from collections import deque
+
+def solution(n, computers):
+    visited = [False] * n  # 각 컴퓨터 방문 여부
+    count = 0  # 네트워크 개수
+    
+    for i in range(n):
+        # 아직 방문하지 않은 컴퓨터라면
+        if not visited[i]:
+            count += 1  # 새로운 네트워크 시작
+            
+            queue = deque()
+            queue.append(i)      # 시작 컴퓨터 큐에 넣기
+            visited[i] = True    # 방문 처리
+            
+            # BFS 시작
+            while queue:
+                cur = queue.popleft()  # 현재 컴퓨터
+                
+                # 현재 컴퓨터와 연결된 모든 컴퓨터 확인
+                for j in range(n):
+                    # 연결되어 있고 아직 방문 안 했다면
+                    if computers[cur][j] == 1 and not visited[j]:
+                        visited[j] = True      # 방문 처리
+                        queue.append(j)        # 큐에 추가
+    
+    return count  # 총 네트워크 개수 반환
+
+
+
+
+
+
+
+
+
+####
+🤔 왜 “방문 안 한 노드”를 찾냐?
+
+우리가 원하는 건:
+
+연결된 덩어리가 몇 개인가?
+
+그럼 이렇게 하면 돼:
+
+1️⃣ 1번 컴퓨터를 본다
+→ 연결된 애들 다 탐색 (2까지 감)
+→ 이 묶음 끝
+
+2️⃣ 다음으로 아직 안 본 컴퓨터를 찾는다
+→ 3 발견
+→ 3에서 시작해서 4,5 다 탐색
+→ 두 번째 묶음 끝
+
+끝.
+
+
+######
+
+네트워크 문제 기본 틀 👇
+
+1️⃣ visited = [False] * n 만든다
+2️⃣ count = 0
+
+3️⃣ 모든 컴퓨터를 돌면서
+
+for i in range(n):
+    if visited[i] == False:
+        BFS(i)   # 또는 DFS(i)
+        count += 1
+
+#######
+
+computers[i][j] == 1 의 의미는:
+
+👉 i번 컴퓨터와 j번 컴퓨터가 연결되어 있다 는 뜻
+방문이 아니라 연결 정보
+
+computers[i][j] == 1 → 연결됨
+visited[i] == True → 이미 탐색 끝남
+
+
+
+
+
+######## 
+🔹 1단계: 준비
+
+visited = [False] * n
+
+count = 0
+
+🔹 2단계: 모든 노드 돌기
+for i in range(n):
+    if not visited[i]:
+        BFS 시작
+        count += 1
+
+👉 아직 방문 안 한 노드 발견 = 새로운 네트워크 시작
+
+🔹 3단계: BFS 내부 흐름
+
+큐 생성
+
+시작 노드 방문 처리
+
+큐에 시작 노드 넣기
+
+queue = deque()
+visited[i] = True
+queue.append(i)
+🔹 4단계: 큐 빌 때까지 반복
+while queue:
+    cur = queue.popleft()
+    
+    for j in range(n):
+        if computers[cur][j] == 1 and not visited[j]:
+            visited[j] = True
+            queue.append(j)
