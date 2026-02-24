@@ -1,0 +1,14 @@
+https://school.programmers.co.kr/learn/courses/30/lessons/59043
+
+# 문제: ANIMAL_OUTS 테이블의 ANIMAL_ID는 ANIMAL_INS의 ANIMAL_ID의 외래 키입니다.
+-> 외래키?
+🔑 외래 키(Foreign Key)란?
+다른 테이블의 기본 키(Primary Key)를 참조하는 컬럼
+
+# 날짜가 빠른 순 -> 오름차순 ASC
+
+-- 코드를 입력하세요
+SELECT I.ANIMAL_ID, I.NAME
+FROM ANIMAL_INS AS I JOIN ANIMAL_OUTS AS O ON I.ANIMAL_ID = O.ANIMAL_ID
+WHERE I.DATETIME > O.DATETIME
+ORDER BY I.DATETIME  ASC;
