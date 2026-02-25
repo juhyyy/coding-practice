@@ -1,0 +1,43 @@
+📌 핵심 구조 비교
+✅ BFS
+queue = deque()
+queue.append(i)
+visited[i] = True
+
+while queue:
+    cur = queue.popleft()
+    for j in range(n):
+        if computers[cur][j] == 1 and not visited[j]:
+            visited[j] = True
+            queue.append(j)
+
+특징:
+
+큐에 넣고
+하나씩 꺼내면서
+옆으로 퍼짐
+
+✅ DFS
+def dfs(i):
+    visited[i] = True
+    for j in range(n):
+        if computers[i][j] == 1 and not visited[j]:
+            dfs(j)
+
+👉 특징:
+
+함수 안에서
+바로 깊게 들어감
+끝까지 갔다가 돌아옴
+
+🎯 그림으로 이해
+
+0 - 1 - 2
+BFS
+
+0 → 1 → 2
+(한 단계씩 옆으로)
+
+DFS
+
+0 → 1 → 2 → (끝) → 돌아옴
