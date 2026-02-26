@@ -1,0 +1,45 @@
+[BFS]
+i번 컴퓨터를 이미 어떤 네트워크 탐색에서 처리했는가?
+    for i in range(n):
+        # 아직 방문하지 않은 컴퓨터라면
+        if not visited[i]:
+            count += 1 
+
+
+----
+from collections import deque
+def solution(n, computers):
+    visited = [False] *n # 각 컴퓨터의 방문 여부
+    count = 0 # 네트워크 개수
+    
+    for i in range(n):
+        if not visited[i]:
+            count+=1 # 새로운 네트워크 시작
+            '''
+            덩어리는 어디에 저장됨?
+
+👉 저장 안 해. 그냥 지나가.
+
+BFS/DFS가 한 번 돌면
+그 덩어리에 속한 애들을 전부 True로 바꿔버리고 끝
+같은 덩어리에 속한 노드들은 전부 visited에 True로 저장돼
+            '''
+            
+            
+            queue = deque()
+            queue.append(i)  #시작 컴퓨터를 큐에 넣기
+            visited[i]= True #방 문 처리
+            
+            # BFS 시작
+            while queue: # 큐가 있으면, 있을 때까지
+                cur = queue.popleft() # 현재 컴퓨터 -> 맨 왼쪽 시작점 팝 하기 (큐에서 꺼내서 = 반환하고 지정)
+                
+                
+                # 현재 컴퓨터(i)와 연결된 모든 컴퓨터(j: 0~n) 확인
+                for j in range(n):
+                    # 연결 되어 있고 아직 방문 안했다면,
+                    if computers[cur][j] ==1 and not visited[j]:
+                        visited[j]=True
+                        queue.append(j)
+                    
+    return count
