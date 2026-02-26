@@ -1,0 +1,57 @@
+https://school.programmers.co.kr/learn/courses/30/lessons/133027
+
+JULY테이블의 FLAVOR는 FIRST_HALF 테이블의 FLAVOR의 외래 키입니다.
+
+7월 아이스크림 총 주문량과 상반기의 아이스크림 총 주문량을 더한 값이 큰 순서대로 상위 3개의 맛을 조회하는 SQL 문을 작성해주세요.
+-> 상위 3개 뽑기
+ORDER BY SALES_AMOUNT DESC
+LIMIT 3;
+
+## 1차 
+# ID 가 같으면 TOTAL오더를더하기
+SELECT F.FLAVOR
+FROM FIRST_HALF F JOIN JULY J ON  F.SHIPMENT_ID = J.SHIPMENT_ID
+ORDER BY (F.TOTAL_ORDER + J.TOTAL_ORDER) DESC
+LIMIT 3;
+
+=>🔥 JULY는 같은 FLAVOR가 여러 행일 수 있다.
+
+이건 출하번호 기준 1:1 매칭
+but,
+같은 맛이 7월에 여러 번 출하될 수 있음
+즉, JULY의 TOTAL_ORDER는 FLAVOR별로 먼저 합쳐야 한다.
+
+## 정답
+
+
+✅ 올바른 접근
+1️⃣ JULY를 FLAVOR별로 먼저 SUM
+2️⃣ FIRST_HALF와 FLAVOR 기준 JOIN
+3️⃣ 두 값을 더해서 정렬
+
+SELECT F.FLAVOR
+FROM FIRST_HALF F
+JOIN (
+    SELECT FLAVOR, SUM(TOTAL_ORDER) AS JULY_TOTAL
+    FROM JULY
+    GROUP BY FLAVOR
+) J
+ON F.FLAVOR = J.FLAVOR
+ORDER BY (F.TOTAL_ORDER + J.JULY_TOTAL) DESC
+LIMIT 3;
+
+
+#✅ UNION ALL 풀이 (더 깔끔함) - 조인 안
+SELECT FLAVOR
+FROM (
+    SELECT FLAVOR, TOTAL_ORDER
+    FROM FIRST_HALF
+    
+    UNION ALL
+    
+    SELECT FLAVOR, TOTAL_ORDER
+    FROM JULY
+) T
+GROUP BY FLAVOR
+ORDER BY SUM(TOTAL_ORDER) DESC
+LIMIT 3;
