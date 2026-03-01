@@ -18,6 +18,18 @@ def solution(s):
     return int(s)
 
 
+
+
+
+'''
+🔹 numbers.items()
+
+뜻은:
+
+(key, value) 쌍을 꺼내라
+
+'''
+
 ######
 💡 왜 이게 통하냐?
 
