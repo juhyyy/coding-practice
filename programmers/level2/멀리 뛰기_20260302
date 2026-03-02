@@ -1,0 +1,45 @@
+https://school.programmers.co.kr/learn/courses/30/lessons/12914
+
+피보나치 였음..
+
+
+##첫트
+def solution(n):
+    mod = 1234567
+    a,b = 1,2
+    
+    for _ in range(3,n+1):
+        a,b = b, (a+b)%mod
+    
+    return b
+
+
+=> n 이 1,2일 때  예외처리 안해서 오류남.
+
+
+## 2트
+
+def solution(n):
+    mod = 1234567
+    a,b = 1,2
+    
+    if n <=2:
+        return n
+    for _ in range(3,n+1):
+        a,b = b, (a+b)%mod
+        return b
+
+return이 for문 안에 들어가 있음 =>첫 번째 반복 돌자마자, 바로 return 해버림.
+
+
+# 3트 정답코드
+
+def solution(n):
+    mod = 1234567
+    a,b = 1,2
+    
+    if n <=2:
+        return n
+    for _ in range(3,n+1):
+        a,b = b, (a+b)%mod
+    return b
