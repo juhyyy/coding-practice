@@ -1,0 +1,33 @@
+어떤 과학자가 발표한 논문 n편 중, 
+h번 이상 인용된 논문이 h편 이상이고 나머지 논문이 h번 이하 인용되었다면 
+h의 최댓값이 이 과학자의 H-Index입니다.
+
+=> 이게 뭔말이냐 나 뇌 녹았나
+
+딕셔너리로 풀까?
+-> 정렬로 풀래.
+
+딕셔너리는 “몇 번 나왔는지”를 세는 구조.
+근데 우리는 “위에서부터 몇 개 가능하냐”를 보는 문제.
+
+즉:
+
+딕셔너리 → 분포 문제
+정렬 → 순위 문제
+
+
+
+def solution(citations):
+    citations.sort(reverse=True)
+    
+    for i in range(len(citations)):
+        if citations[i] < i + 1: ###############
+            return i
+    return len(citations)
+
+
+# citations[i] vs citations[i+1] => 정렬했으니까 당연히 참이어서 생각할 필요도 없고
+# citations[i] vs (i+1) 이 부분을 이해해야함.
+
+
+##100퍼센트 이해는 못함  ㅠ 
