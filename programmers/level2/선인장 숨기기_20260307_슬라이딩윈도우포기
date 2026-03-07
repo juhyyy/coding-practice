@@ -1,0 +1,111 @@
+https://school.programmers.co.kr/learn/courses/30/lessons/468379
+
+슬라이딩 윈도우 최솟값 = 덱
+
+새 숫자가 들어올 때, 덱 뒤에서부터 나보다 큰 값은 다 버린다
+어차피 나보다 크고 나보다 늦게 나온 애들은 절대 최솟값이 될 수 없으니까!
+
+1️⃣ 격자에서 가능한 모든 h×w 직사각형을 생각한다
+
+2️⃣ 그 직사각형 안에 있는 칸들 중에서
+가장 빨리 비 맞는 칸 (가장 작은 숫자)을 찾는다
+
+그 칸 안에서 가장 첫번째로 맞는 비 = 창안의 최솟값 
+
+3️⃣ 그 값이 가장 큰 직사각형을 고른다
+
+
+
+
+
+
+
+
+
+#################
+ 1단계  # 빗방울 순서 격자에 기록
+def solution(m, n, h, w, drops):
+    # 격자 초기화 (무한대로)
+    grid = ?  # grid = [[float('inf')]*n for _ in range(m)]
+    
+    # 빗방울 순서 기록
+    for i, (r, c) in enumerate(drops):
+        grid[r][c] = ? #  grid[r][c] = i + 1
+
+2단계 — 각 행마다 크기 w짜리 슬라이딩 윈도우 최솟값 구하기
+
+
+# 행 방향 슬라이딩 윈도우 최솟값
+row_min = [[float('inf')] * (n-w+1) for _ in range(m)]
+
+#
+https://claude.ai/chat/2a363325-930b-4652-be66-2bd2529dcfc6
+
+#
+덱 규칙 두 개 
+
+새 값보다 큰 값은 뒤에서 제거 (쓸모없으니까)
+창 범위 벗어난 값은 앞에서 제거 (창 밖이니까)
+
+#for r in range(m):
+    d = deque() # 덱에 인덱스를 저장
+    for c in range(n):
+        # 1. 덱 뒤에서 현재 값보다 큰 거 제거
+        while d and grid[r][d[-1]] >= grid[r][c]: 
+# d[-1]은 덱의 맨 뒤 인덱스
+            d.pop()
+        # 2. 현재 인덱스 추가
+        d.append(c)
+        # 3. 창 범위 벗어난 거 앞에서 제거
+        if d[0] < c - w + 1:
+            d.popleft()
+        # 4. 창이 완성됐으면 최솟값 저장
+        if c >= w - 1:
+            row_min[r][c-w+1] = grid[r][d[0]]
+
+
+######################
+from collections import deque
+
+def solution(m, n, h, w, drops):
+    # 1. 빗방울 순서 격자에 기록
+    grid = [[float('inf')] * n for _ in range(m)]
+    for i, (r, c) in enumerate(drops):
+        grid[r][c] = i + 1
+
+    # 2. 행 방향 슬라이딩 윈도우 최솟값
+    row_min = [[float('inf')] * (n-w+1) for _ in range(m)]
+    for r in range(m):
+        d = deque()
+        for c in range(n):
+            while d and grid[r][d[-1]] >= grid[r][c]:
+                d.pop()
+            d.append(c)
+            if d[0] < c - w + 1:
+                d.popleft()
+            if c >= w - 1:
+                row_min[r][c-w+1] = grid[r][d[0]]
+
+    # 3. 열 방향 슬라이딩 윈도우 최솟값
+    col_min = [[float('inf')] * (n-w+1) for _ in range(m-h+1)]
+    for c in range(n-w+1):
+        d = deque()
+        for r in range(m):
+            while d and row_min[d[-1]][c] >= row_min[r][c]:
+                d.pop()
+            d.append(r)
+            if d[0] < r - h + 1:
+                d.popleft()
+            if r >= h - 1:
+                col_min[r-h+1][c] = row_min[d[0]][c]
+
+    # 4. 최댓값 위치 찾기
+    best = -1
+    ans = [0, 0]
+    for r in range(m-h+1):
+        for c in range(n-w+1):
+            if col_min[r][c] > best:
+                best = col_min[r][c]
+                ans = [r, c]
+
+    return ans
