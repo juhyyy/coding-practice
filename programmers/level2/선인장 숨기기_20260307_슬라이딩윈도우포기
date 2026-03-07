@@ -63,7 +63,7 @@ https://claude.ai/chat/2a363325-930b-4652-be66-2bd2529dcfc6
         # 4. 창이 완성됐으면 최솟값 저장
         if c >= w - 1:
             row_min[r][c-w+1] = grid[r][d[0]]
-
+창이 완성됐을 때, 덱 맨 앞(= 최솟값)을 row_min에 저장해라!
 
 ######################
 from collections import deque
