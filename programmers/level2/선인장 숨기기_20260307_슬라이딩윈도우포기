@@ -51,7 +51,7 @@ https://claude.ai/chat/2a363325-930b-4652-be66-2bd2529dcfc6
     d = deque() # 덱에 인덱스를 저장
     for c in range(n):
         # 1. 덱 뒤에서 현재 값보다 큰 거 제거
-        while d and grid[r][d[-1]] >= grid[r][c]: 
+        while d and grid[r][d[-1]] >= grid[r][c]:  #덱이 비어있으면 d[-1] 하는 순간 에러나니까 d가 존재하는 지를 먼저 봄
 # d[-1]은 덱의 맨 뒤 인덱스
             d.pop()
         # 2. 현재 인덱스 추가
