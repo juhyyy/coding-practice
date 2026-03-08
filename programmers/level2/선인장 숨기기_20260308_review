@@ -1,0 +1,49 @@
+https://school.programmers.co.kr/learn/courses/30/lessons/468379
+
+
+
+
+from collections import deque
+
+def solution(m, n, h, w, drops):
+    # 1. 빗방울 순서 격자에 기록
+    grid = [[float('inf')] * n for _ in range(m)]
+    for i, (r, c) in enumerate(drops):
+        grid[r][c] = i + 1
+
+    # 2. 행 방향 슬라이딩 윈도우 최솟값
+    row_min = [[float('inf')] * (n-w+1) for _ in range(m)]
+    for r in range(m):
+        d = deque()
+        for c in range(n):
+            while d and grid[r][d[-1]] >= grid[r][c]:
+                d.pop()
+            d.append(c)
+            if d[0] < c - w + 1:
+                d.popleft()
+            if c >= w - 1:
+                row_min[r][c-w+1] = grid[r][d[0]]
+
+    # 3. 열 방향 슬라이딩 윈도우 최솟값
+    col_min = [[float('inf')] * (n-w+1) for _ in range(m-h+1)]
+    for c in range(n-w+1):
+        d = deque()
+        for r in range(m):
+            while d and row_min[d[-1]][c] >= row_min[r][c]:
+                d.pop()
+            d.append(r)
+            if d[0] < r - h + 1:
+                d.popleft()
+            if r >= h - 1:
+                col_min[r-h+1][c] = row_min[d[0]][c]
+
+    # 4. 최댓값 위치 찾기
+    best = -1
+    ans = [0, 0]
+    for r in range(m-h+1):
+        for c in range(n-w+1):
+            if col_min[r][c] > best:
+                best = col_min[r][c]
+                ans = [r, c]
+
+    return ans
