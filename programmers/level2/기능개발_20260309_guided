@@ -1,0 +1,40 @@
+https://school.programmers.co.kr/learn/courses/30/lessons/42586
+
+
+#앞 기능이 배포되어야 뒤 기능도 배포 가능 // 완료 순서 ≠ 배포 순서
+
+#문제에서 구하는 것
+“각 배포 시점마다 몇 개의 기능이 같이 배포되는가”
+[2, 1] 첫번째 배포할 때는 2개 두번째 배포할 때는 1개
+
+#“기준값 유지하면서 묶기” 패턴
+1️⃣ 완료까지 걸리는 기간 계산
+2️⃣ 앞 기준값으로 묶기
+
+def solution(progresses, speeds):
+    answer = []
+    
+    # 1️⃣ 각 기능이 완료되기까지 걸리는 일수 계산
+    days = []
+    for p, s in zip(progresses, speeds):
+        remain = 100 - p
+        day = remain // s
+        if remain % s != 0:
+            day += 1
+        days.append(day)
+    
+    # 2️⃣ 배포 묶기
+    current = days[0]
+    count = 1
+    
+    for d in days[1:]:
+        if d <= current:
+            count += 1
+        else:
+            answer.append(count)
+            current = d
+            count = 1
+    
+    answer.append(count)
+    
+    return answer
