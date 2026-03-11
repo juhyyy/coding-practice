@@ -1,0 +1,17 @@
+https://school.programmers.co.kr/learn/courses/30/lessons/1845
+
+가능한 한 많은 "종류"를 가져가기 (마리 수 x) 
+min(종류 수, N/2)
+
+1️⃣ len(nums)
+2️⃣ len(set(nums))
+3️⃣ N/2
+
+1. 전체 마리 수 2. 종류 수 3. 전체 마리의 반
+
+def solution(nums):
+    N=len(nums)
+
+    return min(len(set(nums)),N/2)
+
+# 문제 이해, 길어서 쫄았는데 그럴 필요없다는 걸 배웠다. 
