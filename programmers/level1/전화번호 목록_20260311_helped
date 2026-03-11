@@ -1,0 +1,58 @@
+https://school.programmers.co.kr/learn/courses/30/lessons/42577
+
+# 1트
+def solution(phone_book):
+    pre = phone_book[0]
+    
+    for i in range(1,len(phone_book)+1):
+        num= phone_book[i][0:len(pre)+1]
+        if pre == num:
+            return True
+        else:
+            return False  => 첫 번째 비교에서 바로 함수가 끝난다.1가 아니면 바로 반환해버려서 2(다음숫자)까지 안감.
+
+# 2트
+def solution(phone_book):
+    pre = phone_book[0]
+    
+    for i in range(1,len(phone_book)):
+        num= phone_book[i][0:len(pre)]
+        if pre == num:
+            return False
+    return True
+
+
+
+=> 문제 잘 안읽었음. 모든 번호가 다른 번호의 prefix인지 검사. 첫번쨰만이 아니라. 
+
+# 3트 
+def solution(phone_book):
+    for j in range(len(phone_book)):
+        pre = phone_book[j]
+        
+        for i in range(len(phone_book)):
+            if i == j:
+                continue
+            
+            num = phone_book[i][0:len(pre)]
+            
+            if pre == num:
+                return False
+                
+    return True
+
+
+=> 효율성 통과 X . sort 사용해서 풀어보기
+
+# 지피티 힌트 : startswith()
+
+# 정답 코드 
+
+def solution(phone_book):
+    phone_book.sort()
+    
+    for i in range(len(phone_book)-1):
+        if phone_book[i+1].startswith(phone_book[i]):
+            return False
+            
+    return True
