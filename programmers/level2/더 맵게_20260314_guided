@@ -1,0 +1,35 @@
+https://school.programmers.co.kr/learn/courses/30/lessons/42626
+
+모든 음식의 스코빌 지수를 K 이상으로 만들기 위해 섞어야 하는 최소 횟수
+=모든 음식의 맵기가 K 이상이 될 때까지 음식을 섞어야 하는데, 그때 필요한 섞는 횟수를 구하라
+=섞으면 이 전의 숫자 두개는 사라지고 하나의 숫자가 된다.
+
+
+왜 항상 “가장 작은 두 개”를 섞어야 최소 횟수가 되는지 => 가장 작은 값이 빨리 커져야 하니까.
+
+heap을 선택해야하는 이유:
+매번 “가장 작은 두 개”를 빨리 찾기 위해서 heap을 쓴다.
+heap은 구조상 항상 최소값이 맨 위
+
+import heapq
+
+def solution(scoville, K):
+    
+    heapq.heapify(scoville)
+    count = 0
+    
+    while scoville[0] < K:
+        
+        if len(scoville) == 1:   #더 이상 섞을 수 없는데도 K를 못 넘는 경우를 잡기 위한 것
+            return -1
+        
+        a = heapq.heappop(scoville)
+        b = heapq.heappop(scoville)
+        
+        new = a + (b * 2)
+        
+        heapq.heappush(scoville, new)
+        
+        count += 1
+    
+    return count
